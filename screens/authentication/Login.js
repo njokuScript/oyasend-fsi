@@ -5,6 +5,7 @@ export class Login extends Component {
   render() {
     return (
       <View>
+
         <Text> Login </Text>
       </View>
     );
