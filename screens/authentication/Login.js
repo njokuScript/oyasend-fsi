@@ -34,7 +34,7 @@ export class Login extends Component {
             <Text>Hello Buddy,</Text>
           </View>
           <View>
-            <Text>Login</Text>
+            <Text>Welcome Back</Text>
           </View>
         </View>
         <Formik
