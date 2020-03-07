@@ -58,7 +58,7 @@ export default class App extends Component {
     );
   };
 
-  onDone = () => this.props.navigation.navigate("Login");
+  onDone = () => this.props.navigation.navigate("Register");
   render() {
     return (
       <AppIntroSlider

@@ -49,15 +49,16 @@ class Register extends Component {
   };
 
   handleOnRegister = async (values, actions) => {
-    const { phone, password } = values;
+    const { phoneNumber, password } = values;
     try {
-      const response = await api.register({ phone, password });
-      await Utils.setStorageData(response);
+      // const response = await api.register({ phone: phoneNumber, password });
+      // await Utils.setStorageData(response);
 
-      if (response.user) {
-        this.props.navigation.navigate("Bvn");
-      }
+      // if (response.user) {
+      this.props.navigation.navigate("Bvn");
+      //      }
     } catch (error) {
+      console.log(error);
       actions.setFieldError("general", error.message);
     } finally {
       actions.setSubmitting(false);
@@ -73,8 +74,8 @@ class Register extends Component {
         </View>
         <Formik
           initialValues={{ phoneNumber: "", password: "" }}
-          onSubmit={() => {
-            this.handleOnRegister();
+          onSubmit={(values, actions) => {
+            this.handleOnRegister(values, actions);
           }}
           validationSchema={validationSchema}
         >

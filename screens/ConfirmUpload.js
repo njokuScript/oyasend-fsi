@@ -15,7 +15,7 @@ import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import * as Constants from "../../constants";
 import * as Utils from "../../utils";
-export default class UploadScreen extends Component {
+export default class ConfirmUpload extends Component {
   state = {
     image: null,
     uploading: false
@@ -110,7 +110,7 @@ export default class UploadScreen extends Component {
         });
       }
       console.log(uploadResult);
-      this.props.navigation.navigate("App");
+      this.props.navigation.navigate("Complete");
     } catch (e) {
       console.log({ uploadResponse });
       console.log({ uploadResult });

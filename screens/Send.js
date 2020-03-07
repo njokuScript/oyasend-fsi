@@ -15,18 +15,41 @@ import ErrorMessage from "../components/ErrorMessage";
 
 //form validation with yup
 const validationSchema = Yup.object().shape({
-  phoneNumber: Yup.number()
-    .label("Phone")
+  name: Yup.string()
+    .label("Name")
+    .required()
+    .min(2, "Must have at least 2 characters"),
+  accNum: Yup.number()
+    .label("Account")
     .required()
     .positive()
     .integer()
-    .min(11, "Phone number must be at least 11 numbers"),
-  password: Yup.string()
-    .label("Password")
+    .min(10, "Must have at least 11 characters"),
+  bank: Yup.string()
+    .label("Bank")
     .required()
-    .min(6, "Password must be at least 6 characters")
+    .min(2, "Must have a minimum of 2"),
+  amount: Yup.number()
+    .label("Bank")
+    .required()
+    .min(100, "Nothunf")
 });
+handleOnComplete = async (values, actions) => {
+  const { name, accNum, bank, amount, pin } = values;
+  try {
+    // const response = await api.register({ phone: phoneNumber, password });
+    // await Utils.setStorageData(response);
 
+    // if (response.user) {
+    this.props.navigation.navigate("Confirm");
+    //      }
+  } catch (error) {
+    console.log(error);
+    actions.setFieldError("general", error.message);
+  } finally {
+    actions.setSubmitting(false);
+  }
+};
 class Send extends Component {
   render() {
     return (
@@ -57,7 +80,7 @@ class Send extends Component {
           }) => (
             <Fragment>
               <FormInput
-                id="name"
+                name="name"
                 value={values.name}
                 onChangeText={handleChange("name")}
                 placeholder="Enter Account Name"
@@ -68,7 +91,7 @@ class Send extends Component {
               />
               <ErrorMessage errorValue={touched.phone && errors.phone} />
               <FormInput
-                id="accNum"
+                name="accNum"
                 value={values.accNum}
                 onChangeText={handleChange("accNum")}
                 placeholder="Enter Account Number"
@@ -78,7 +101,7 @@ class Send extends Component {
               />
               <ErrorMessage errorValue={touched.password && errors.password} />
               <FormInput
-                id="bank"
+                name="bank"
                 value={values.bank}
                 onChangeText={handleChange("bank")}
                 placeholder="Enter Account Number"
@@ -88,13 +111,25 @@ class Send extends Component {
               />
               <ErrorMessage errorValue={touched.password && errors.password} />
               <FormInput
-                id="amount"
+                name="amount"
                 value={values.amount}
                 onChangeText={handleChange("amount")}
                 placeholder="Enter Amount"
                 iconColor="#9C27B0"
                 iconName="md-cash"
                 onBlur={handleBlur("amount")}
+              />
+              <ErrorMessage errorValue={touched.password && errors.password} />
+
+              <FormInput
+                name="pin"
+                value={values.pin}
+                onChangeText={handleChange("pin")}
+                placeholder="Enter pin"
+                secureTextEntry={true}
+                iconColor="#9C27B0"
+                iconName="md-cash"
+                onBlur={handleBlur("pin")}
               />
               <ErrorMessage errorValue={touched.password && errors.password} />
 
