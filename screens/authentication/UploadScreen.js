@@ -123,21 +123,17 @@ async function uploadImageAsync(uri) {
   let apiUrl = "input api url";
 
   let uriParts = uri.split(".");
-  let fileType = uriParts[uriParts.length - 1];
+  // let fileType = uriParts[uriParts.length - 1];
 
   let formData = new FormData();
-  formData.append("photo", {
-    uri,
-    name: `photo.${fileType}`,
-    type: `image/${fileType}`
-  });
+  formData.append("image", uri);
 
   let options = {
     method: "POST",
     body: formData,
     headers: {
-      Accept: "",
-      "Content-Type": ""
+      Accept: "application/json",
+      "Content-Type": "multipart/formData"
     }
   };
 
