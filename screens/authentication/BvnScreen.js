@@ -9,20 +9,26 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
+import UploadScreen from "./UploadScreen";
 import * as Yup from "yup";
 import FormInput from "../../components/FormInput";
 import ErrorMessage from "../../components/ErrorMessage";
 
 //form validation with yup
 const validationSchema = Yup.object().shape({
-  number: Yup.string()
+  name: Yup.string()
+    .label("Name")
+    .required()
+    .min(2, "Must have at least 2 characters"),
+  number: Yup.number()
     .label("bvn")
     .required()
+    .positive()
+    .integer()
     .min(10, "BVN must be at least 10 numbers")
 });
 
 class BvnScreen extends Component {
-  handleOnContinue = () => this.props.navigation.navigate("Upload");
   // handleOnLogin = async (values, actions) => {
   //   const { phone, password } = values;
   //   try {
@@ -39,7 +45,8 @@ class BvnScreen extends Component {
   //     actions.setSubmitting(false);
   //   }
   // };
-
+  onRegister = () => this.props.navigation.navigate("UploadScreen");
+  handleOnRegister = () => this.props.navigation.navigate("UploadScreen");
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -47,9 +54,9 @@ class BvnScreen extends Component {
           <Text style={styles.textStyle}>BVN</Text>
         </View>
         <Formik
-          initialValues={{ bvn: "" }}
+          initialValues={{ bvn: "", name: "" }}
           onSubmit={() => {
-            this.handleOnContinue();
+            this.handleOnRegister();
           }}
           validationSchema={validationSchema}
         >
@@ -74,11 +81,20 @@ class BvnScreen extends Component {
                 iconColor="#9C27B0"
                 onBlur={handleBlur("bvn")}
               />
-              <ErrorMessage errorValue={touched.phone && errors.phone} />
-
+              <ErrorMessage errorValue={touched.bvn && errors.bvn} />
+              <FormInput
+                name="name"
+                value={values.name}
+                onChangeText={handleChange("name")}
+                placeholder="Enter your full name"
+                iconName="md-person"
+                iconColor="#9C27B0"
+                onBlur={handleBlur("name")}
+              />
+              <ErrorMessage errorValue={touched.name && errors.name} />
               <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                  onPress={handleSubmit}
+                  onPress={this.onRegister}
                   style={styles.buttonStyle}
                 >
                   <Text style={styles.buttonText}>Continue</Text>

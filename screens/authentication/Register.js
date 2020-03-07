@@ -15,9 +15,11 @@ import ErrorMessage from "../../components/ErrorMessage";
 
 //form validation with yup
 const validationSchema = Yup.object().shape({
-  phoneNumber: Yup.string()
+  phoneNumber: Yup.number()
     .label("Phone")
     .required()
+    .positive()
+    .integer()
     .min(11, "Phone number must be at least 11 numbers"),
   password: Yup.string()
     .label("Password")

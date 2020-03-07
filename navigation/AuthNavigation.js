@@ -10,8 +10,9 @@ const AuthNavigation = createStackNavigator(
     Welcome: Welcome,
     Login: Login,
     Register: Register,
+
+    UploadScreen: UploadScreen,
     Bvn: BvnScreen,
-    Upload: UploadScreen,
     ForgotPassword: ForgotPassword
   },
   {
