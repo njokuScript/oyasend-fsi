@@ -15,20 +15,20 @@ export default class BottomTabNavigation extends React.Component {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             if (route.name === "Home") {
-              iconName = "home";
+              iconName = "md-home";
             } else if (route.name === "Send") {
-              iconName = "navigate";
+              iconName = "md-navigate";
             } else if (route.name === "Card") {
-              iconName = "card";
+              iconName = "md-card";
             } else if (route.name === "Profile") {
-              iconName = "person";
+              iconName = "md-person";
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           }
         })}
         tabBarOptions={{
           activeTintColor: "#9C27B0",
-          inactiveTintColor: "#5F5B5B"
+          inactiveTintColor: "black"
         }}
       >
         <Tab.Screen name="Home" component={Home} />

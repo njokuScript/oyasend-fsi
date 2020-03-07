@@ -8,7 +8,7 @@ export default createAppContainer(
       App: StackNavigation
     },
     {
-      initialRouteName: "Loading"
+      initialRouteName: "Auth"
     }
   )
 );

@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   View,
   TouchableOpacity,
+  Image,
   Text
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -24,7 +25,7 @@ const validationSchema = Yup.object().shape({
     .min(6, "Password must be at least 6 characters")
 });
 
-class Login extends Component {
+class Register extends Component {
   state = {
     passwordVisibility: true,
     rightIcon: "ios-eye"
@@ -43,7 +44,7 @@ class Login extends Component {
     }));
   };
 
-  handleOnRegister = () => this.props.navigation.navigate("App");
+  handleOnRegister = () => this.props.navigation.navigate("Bvn");
   // handleOnLogin = async (values, actions) => {
   //   const { phone, password } = values;
   //   try {
@@ -66,10 +67,7 @@ class Login extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <View>
-          <Text style={styles.textStyle}>Welcome back</Text>
-        </View>
-        <View style={styles.imageStyle}>
-          <Image source={require("../../assets/login-image.png")} />
+          <Text style={styles.textStyle}>Oya Send</Text>
         </View>
         <Formik
           initialValues={{ phoneNumber: "", password: "" }}
@@ -95,7 +93,7 @@ class Login extends Component {
                 onChangeText={handleChange("phoneNumber")}
                 placeholder="Enter Phone Number"
                 autoCapitalize="none"
-                iconName="call"
+                iconName="ios-call"
                 iconColor="#9C27B0"
                 onBlur={handleBlur("phoneNumber")}
               />
@@ -106,7 +104,7 @@ class Login extends Component {
                 onChangeText={handleChange("password")}
                 placeholder="Enter password"
                 secureTextEntry={passwordVisibility}
-                iconName="lock-closed"
+                iconName="ios-lock"
                 iconColor="#9C27B0"
                 onBlur={handleBlur("password")}
                 rightIcon={
@@ -129,7 +127,7 @@ class Login extends Component {
                   onPress={handleSubmit}
                   style={styles.buttonStyle}
                 >
-                  <Text style={styles.buttonText}>Register</Text>
+                  <Text style={styles.buttonText}>Continue</Text>
                 </TouchableOpacity>
               </View>
               <ErrorMessage errorValue={errors.general} />

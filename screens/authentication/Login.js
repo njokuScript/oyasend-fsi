@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   View,
   TouchableOpacity,
+  Image,
   Text
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -68,9 +69,6 @@ class Login extends Component {
         <View>
           <Text style={styles.textStyle}>Welcome back</Text>
         </View>
-        <View style={styles.imageStyle}>
-          <Image source={require("../../assets/login-image.png")} />
-        </View>
         <Formik
           initialValues={{ phoneNumber: "", password: "" }}
           onSubmit={() => {
@@ -95,7 +93,7 @@ class Login extends Component {
                 onChangeText={handleChange("phoneNumber")}
                 placeholder="Enter Phone Number"
                 autoCapitalize="none"
-                iconName="call"
+                iconName="ios-call"
                 iconColor="#9C27B0"
                 onBlur={handleBlur("phoneNumber")}
               />
@@ -106,7 +104,7 @@ class Login extends Component {
                 onChangeText={handleChange("password")}
                 placeholder="Enter password"
                 secureTextEntry={passwordVisibility}
-                iconName="lock-closed"
+                iconName="ios-lock"
                 iconColor="#9C27B0"
                 onBlur={handleBlur("password")}
                 rightIcon={
