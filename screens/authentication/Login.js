@@ -12,6 +12,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FormInput from '../../components/FormInput';
 import ErrorMessage from '../../components/ErrorMessage';
+import * as api from '../../api';
+import * as Utils from '../../utils';
 
 //form validation with yup
 const validationSchema = Yup.object().shape({
@@ -44,23 +46,22 @@ class Login extends Component {
 		}));
 	};
 
-	handleOnLogin = () => this.props.navigation.navigate('App');
-	// handleOnLogin = async (values, actions) => {
-	//   const { phone, password } = values;
-	//   try {
-	//     const response = await firebase
-	//       .auth()
-	//       .signInWithEmailAndPassword(email, password);
+	// handleOnLogin = () => this.props.navigation.navigate('App');
+	handleOnLogin = async (values, actions) => {
+		const { phone, password } = values;
+		try {
+			const response = await api.login({ phone, password });
+			await Utils.setStorageData(response);
 
-	//     if (response.user) {
-	//       this.props.navigation.navigate("App");
-	//     }
-	//   } catch (error) {
-	//     actions.setFieldError("general", error.message);
-	//   } finally {
-	//     actions.setSubmitting(false);
-	//   }
-	// };
+			if (response.user) {
+				this.props.navigation.navigate('App');
+			}
+		} catch (error) {
+			actions.setFieldError('general', error.message);
+		} finally {
+			actions.setSubmitting(false);
+		}
+	};
 
 	render() {
 		const { passwordVisibility, rightIcon } = this.state;
