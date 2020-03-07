@@ -13,8 +13,7 @@ import {
 } from "react-native";
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
-import * as Constants from "../../constants";
-import * as Utils from "../../utils";
+import * as Constants from "../constants";
 export default class ConfirmUpload extends Component {
   state = {
     image: null,
