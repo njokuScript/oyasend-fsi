@@ -34,22 +34,23 @@ const validationSchema = Yup.object().shape({
     .required()
     .min(100, "Nothunf")
 });
-handleOnComplete = async (values, actions) => {
-  const { name, accNum, bank, amount, pin } = values;
-  try {
-    // const response = await api.register({ phone: phoneNumber, password });
-    // await Utils.setStorageData(response);
+// handleOnComplete = async (values, actions) => {
+//   const { name, accNum, bank, amount, pin } = values;
+//   try {
+//     // const response = await api.register({ phone: phoneNumber, password });
+//     // await Utils.setStorageData(response);
 
-    // if (response.user) {
-    this.props.navigation.navigate("Confirm");
-    //      }
-  } catch (error) {
-    console.log(error);
-    actions.setFieldError("general", error.message);
-  } finally {
-    actions.setSubmitting(false);
-  }
-};
+//     // if (response.user) {
+//     this.props.navigation.navigate("Confirm");
+//     //      }
+//   } catch (error) {
+//     console.log(error);
+//     actions.setFieldError("general", error.message);
+//   } finally {
+//     actions.setSubmitting(false);
+//   }
+// };
+onConfirm = () => this.navigation.navigate("Confirm");
 class Send extends Component {
   render() {
     return (
@@ -65,7 +66,9 @@ class Send extends Component {
             amount: "",
             pin: ""
           }}
-          onSubmit={() => {}}
+          onSubmit={() => {
+            this.onConfirm();
+          }}
           validationSchema={validationSchema}
         >
           {({
@@ -104,10 +107,10 @@ class Send extends Component {
                 name="bank"
                 value={values.bank}
                 onChangeText={handleChange("bank")}
-                placeholder="Enter Account Number"
+                placeholder="bank"
                 iconColor="#9C27B0"
                 iconName="md-card"
-                onBlur={handleBlur("accNum")}
+                onBlur={handleBlur("bank")}
               />
               <ErrorMessage errorValue={touched.password && errors.password} />
               <FormInput
