@@ -15,9 +15,11 @@ import ErrorMessage from '../../components/ErrorMessage';
 
 //form validation with yup
 const validationSchema = Yup.object().shape({
-	phoneNumber: Yup.string()
+	phoneNumber: Yup.number()
 		.label('Phone')
 		.required()
+		.positive()
+		.integer()
 		.min(11, 'Phone number must be at least 11 numbers'),
 	password: Yup.string()
 		.label('Password')
@@ -25,55 +27,22 @@ const validationSchema = Yup.object().shape({
 		.min(6, 'Password must be at least 6 characters'),
 });
 
-class Login extends Component {
-	state = {
-		passwordVisibility: true,
-		rightIcon: 'ios-eye',
-	};
-
-	//forgot password route
-	goToForgotPassword = () => this.props.navigation.navigate('ForgotPassword');
-
-	//signup route
-	goToSignup = () => this.props.navigation.navigate('Register');
-
-	handlePasswordVisibility = () => {
-		this.setState(prevState => ({
-			rightIcon: prevState.rightIcon === 'ios-eye' ? 'ios-eye-off' : 'ios-eye',
-			passwordVisibility: !prevState.passwordVisibility,
-		}));
-	};
-
-	handleOnLogin = () => this.props.navigation.navigate('App');
-	// handleOnLogin = async (values, actions) => {
-	//   const { phone, password } = values;
-	//   try {
-	//     const response = await firebase
-	//       .auth()
-	//       .signInWithEmailAndPassword(email, password);
-
-	//     if (response.user) {
-	//       this.props.navigation.navigate("App");
-	//     }
-	//   } catch (error) {
-	//     actions.setFieldError("general", error.message);
-	//   } finally {
-	//     actions.setSubmitting(false);
-	//   }
-	// };
-
+class Send extends Component {
 	render() {
-		const { passwordVisibility, rightIcon } = this.state;
 		return (
 			<SafeAreaView style={styles.container}>
 				<View>
-					<Text style={styles.textStyle}>Welcome back</Text>
+					<Text style={styles.textStyle}>Make Payment</Text>
 				</View>
 				<Formik
-					initialValues={{ phoneNumber: '', password: '' }}
-					onSubmit={() => {
-						this.handleOnLogin();
+					initialValues={{
+						name: '',
+						accNum: '',
+						bank: '',
+						amount: '',
+						pin: '',
 					}}
+					onSubmit={() => {}}
 					validationSchema={validationSchema}
 				>
 					{({
@@ -88,25 +57,24 @@ class Login extends Component {
 					}) => (
 						<Fragment>
 							<FormInput
-								name='phoneNumber'
-								value={values.phoneNumber}
-								onChangeText={handleChange('phoneNumber')}
-								placeholder='Enter Phone Number'
+								id='name'
+								value={values.name}
+								onChangeText={handleChange('name')}
+								placeholder='Enter Account Number'
 								autoCapitalize='none'
-								iconName='ios-call'
 								iconColor='#9C27B0'
-								onBlur={handleBlur('phoneNumber')}
+								onBlur={handleBlur('name')}
 							/>
 							<ErrorMessage errorValue={touched.phone && errors.phone} />
 							<FormInput
-								name='password'
-								value={values.password}
-								onChangeText={handleChange('password')}
-								placeholder='Enter password'
+								id='accNum'
+								value={values.accNum}
+								onChangeText={handleChange('accNum')}
+								placeholder='Enter Account Number'
 								secureTextEntry={passwordVisibility}
 								iconName='ios-lock'
 								iconColor='#9C27B0'
-								onBlur={handleBlur('password')}
+								onBlur={handleBlur('accNum')}
 								rightIcon={
 									<TouchableOpacity onPress={this.handlePasswordVisibility}>
 										<Ionicons name={rightIcon} size={28} color='#9C27B0' />
@@ -115,28 +83,25 @@ class Login extends Component {
 							/>
 							<ErrorMessage errorValue={touched.password && errors.password} />
 							<TouchableOpacity
-								onPress={this.goToForgotPassword}
+								onPress={this.goToLogin}
 								style={styles.buttonStyle2}
 							>
-								<Text style={styles.buttonStyle2Text}>Forgot Password?</Text>
+								<Text style={styles.buttonStyle2Text}>
+									Already have an Account? Login
+								</Text>
 							</TouchableOpacity>
 							<View style={styles.buttonContainer}>
 								<TouchableOpacity
 									onPress={handleSubmit}
 									style={styles.buttonStyle}
 								>
-									<Text style={styles.buttonText}> lOGIN</Text>
+									<Text style={styles.buttonText}>Continue</Text>
 								</TouchableOpacity>
 							</View>
 							<ErrorMessage errorValue={errors.general} />
 						</Fragment>
 					)}
 				</Formik>
-				<TouchableOpacity onPress={this.goToSignup} style={styles.buttonStyle2}>
-					<Text style={styles.buttonStyle2Text}>
-						Don't have an account? Sign Up
-					</Text>
-				</TouchableOpacity>
 			</SafeAreaView>
 		);
 	}
@@ -199,4 +164,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default Login;
+export default Send;
