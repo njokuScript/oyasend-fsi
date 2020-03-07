@@ -1,19 +1,16 @@
-import Icon from "react-native-vector-icons/FontAwesome";
-import { Input } from "react-native-elements";
 import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { HideWithKeyboard } from "react-native-hide-with-keyboard";
 import FormInput from "../../components/FormInput";
 import ErrorMessage from "../../components/ErrorMessage";
 
 //form valdation with yup
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-const ValidationSchema = Yup.object().shape({
-  Phone: Yup.string().matches(phoneRegExp, "Phone number is not valid")
-});
+// const phoneRegExp = /^a-z$/;
+// const ValidationSchema = Yup.object().shape({
+//   Phone: Yup.string().matches(phoneRegExp, "Phone number is not valid")
+// });
 export class Login extends Component {
   handlePasswordVisibility = () => {
     this.setState(prevState => ({
