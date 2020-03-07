@@ -11,9 +11,9 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import { Constants } from "expo";
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
+import * as Constants from "../../constants";
 export default class UploadScreen extends Component {
   state = {
     image: null,
@@ -105,6 +105,7 @@ export default class UploadScreen extends Component {
           image: uploadResult.location
         });
       }
+      console.log(uploadResult);
       this.props.navigation.navigate("App");
     } catch (e) {
       console.log({ uploadResponse });
@@ -120,7 +121,7 @@ export default class UploadScreen extends Component {
 }
 
 async function uploadImageAsync(uri) {
-  let apiUrl = "input api url";
+  let apiUrl = Constants.UPLOAD_IMAGE;
 
   let uriParts = uri.split(".");
   // let fileType = uriParts[uriParts.length - 1];

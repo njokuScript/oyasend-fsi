@@ -19,6 +19,7 @@ const FormInput = ({
       leftIconContainerStyle={styles.iconStyle}
       placeholderTextColor="grey"
       name={name}
+      keyboardType={keyboardType}
       placeholder={placeholder}
       style={styles.input}
     />
