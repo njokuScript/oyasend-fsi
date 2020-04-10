@@ -1,13 +1,13 @@
 import firebase from "firebase";
 export const firebaseConfig = {
-  apiKey: "AIzaSyDMHlSZl7XErEwQWS9nVT3yBj7JuHLe5A8",
-  authDomain: "rehmo-d2ab2.firebaseapp.com",
-  databaseURL: "https://rehmo-d2ab2.firebaseio.com",
-  projectId: "rehmo-d2ab2",
-  storageBucket: "rehmo-d2ab2.appspot.com",
-  messagingSenderId: "472745786335",
-  appId: "1:472745786335:web:15f46eb1bd0c400324226a",
-  measurementId: "G-1WX97WDSHS"
+  apiKey: "AIzaSyAjs9BCodGi4f74X4f67u2MUcsjsgcdq08",
+  authDomain: "oya-send.firebaseapp.com",
+  databaseURL: "https://oya-send.firebaseio.com",
+  projectId: "oya-send",
+  storageBucket: "oya-send.appspot.com",
+  messagingSenderId: "976307137791",
+  appId: "1:976307137791:web:67ee05949670438c03f0ca",
+  measurementId: "G-XBT51W1WY0",
 };
 
 firebase.initializeApp(firebaseConfig);
