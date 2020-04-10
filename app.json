@@ -13,13 +13,15 @@
       "resizeMode": "contain",
       "backgroundColor": "#9C27B0"
     },
-
     "android": {
       "package": "com.dscesut.oyasend"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"]
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    }
   }
 }

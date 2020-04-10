@@ -30,27 +30,30 @@ const validationSchema = Yup.object().shape({
     .required()
     .min(2, "Must have a minimum of 2"),
   amount: Yup.number()
-    .label("Bank")
+    .label("amount")
     .required()
-    .min(100, "Nothunf")
+    .min(2, "enter an amount "),
+  pin: Yup.number()
+    .label(pin)
+    .required()
+    .min(4, "enter a valid pin")
 });
-// handleOnComplete = async (values, actions) => {
-//   const { name, accNum, bank, amount, pin } = values;
-//   try {
-//     // const response = await api.register({ phone: phoneNumber, password });
-//     // await Utils.setStorageData(response);
+handleOnComplete = async (values, actions) => {
+  const { name, accNum, bank, amount, pin } = values;
+  try {
+    // const response = await api.register({ phone: phoneNumber, password });
+    // await Utils.setStorageData(response);
 
-//     // if (response.user) {
-//     this.props.navigation.navigate("Confirm");
-//     //      }
-//   } catch (error) {
-//     console.log(error);
-//     actions.setFieldError("general", error.message);
-//   } finally {
-//     actions.setSubmitting(false);
-//   }
-// };
-onConfirm = () => this.navigation.navigate("Confirm");
+    // if (response.user) {
+    this.props.navigation.navigate("Confirm");
+    //      }
+  } catch (error) {
+    console.log(error);
+    actions.setFieldError("general", error.message);
+  } finally {
+    actions.setSubmitting(false);
+  }
+};
 class Send extends Component {
   render() {
     return (
@@ -66,8 +69,8 @@ class Send extends Component {
             amount: "",
             pin: ""
           }}
-          onSubmit={() => {
-            this.onConfirm();
+          onSubmit={(values, actions) => {
+            this.handleOnComplete(values, actions);
           }}
           validationSchema={validationSchema}
         >
@@ -92,7 +95,7 @@ class Send extends Component {
                 iconColor="#9C27B0"
                 onBlur={handleBlur("name")}
               />
-              <ErrorMessage errorValue={touched.phone && errors.phone} />
+              <ErrorMessage errorValue={touched.name && errors.name} />
               <FormInput
                 name="accNum"
                 value={values.accNum}
@@ -102,7 +105,7 @@ class Send extends Component {
                 iconName="md-card"
                 onBlur={handleBlur("accNum")}
               />
-              <ErrorMessage errorValue={touched.password && errors.password} />
+              <ErrorMessage errorValue={touched.accNum && errors.accNum} />
               <FormInput
                 name="bank"
                 value={values.bank}
@@ -112,7 +115,7 @@ class Send extends Component {
                 iconName="md-card"
                 onBlur={handleBlur("bank")}
               />
-              <ErrorMessage errorValue={touched.password && errors.password} />
+              <ErrorMessage errorValue={touched.bank && errors.bank} />
               <FormInput
                 name="amount"
                 value={values.amount}
@@ -122,7 +125,7 @@ class Send extends Component {
                 iconName="md-cash"
                 onBlur={handleBlur("amount")}
               />
-              <ErrorMessage errorValue={touched.password && errors.password} />
+              <ErrorMessage errorValue={touched.amount && errors.amount} />
 
               <FormInput
                 name="pin"
@@ -134,7 +137,7 @@ class Send extends Component {
                 iconName="md-cash"
                 onBlur={handleBlur("pin")}
               />
-              <ErrorMessage errorValue={touched.password && errors.password} />
+              <ErrorMessage errorValue={touched.pin && errors.pin} />
 
               <View style={styles.buttonContainer}>
                 <TouchableOpacity

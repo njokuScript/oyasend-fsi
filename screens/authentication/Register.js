@@ -5,7 +5,7 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Text
+  Text,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
@@ -26,13 +26,13 @@ const validationSchema = Yup.object().shape({
   password: Yup.string()
     .label("Password")
     .required()
-    .min(6, "Password must be at least 6 characters")
+    .min(6, "Password must be at least 6 characters"),
 });
 
 class Register extends Component {
   state = {
     passwordVisibility: true,
-    rightIcon: "ios-eye"
+    rightIcon: "ios-eye",
   };
 
   //forgot password route
@@ -42,9 +42,9 @@ class Register extends Component {
   goToLogin = () => this.props.navigation.navigate("Login");
 
   handlePasswordVisibility = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       rightIcon: prevState.rightIcon === "ios-eye" ? "ios-eye-off" : "ios-eye",
-      passwordVisibility: !prevState.passwordVisibility
+      passwordVisibility: !prevState.passwordVisibility,
     }));
   };
 
@@ -53,9 +53,21 @@ class Register extends Component {
     try {
       // const response = await api.register({ phone: phoneNumber, password });
       // await Utils.setStorageData(response);
+      const response = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
 
+      if (response.user.uid) {
+        const { uid } = response.user;
+        const userData = { email, name, uid };
+        await firebase
+          .firestore()
+          .collection("users")
+          .doc(`${userData.uid}`)
+          .set(userData);
+        this.props.navigation.navigate("BVN");
+      }
       // if (response.user) {
-      this.props.navigation.navigate("Bvn");
       //      }
     } catch (error) {
       console.log(error);
@@ -87,7 +99,7 @@ class Register extends Component {
             isValid,
             touched,
             handleBlur,
-            isSubmitting
+            isSubmitting,
           }) => (
             <Fragment>
               <FormInput
@@ -146,12 +158,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 100
+    paddingTop: 100,
   },
   imageStyle: {
     flex: 1,
     alignItems: "center",
-    marginTop: 20
+    marginTop: 20,
   },
   textStyle: {
     alignItems: "center",
@@ -162,10 +174,10 @@ const styles = StyleSheet.create({
     fontSize: 27,
     color: "#9C27B0",
     opacity: 1,
-    left: 30
+    left: 30,
   },
   buttonStyle2Text: {
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   buttonStyle: {
     backgroundColor: "#9C27B0",
@@ -176,27 +188,27 @@ const styles = StyleSheet.create({
     opacity: 1,
     width: 329,
     height: 58,
-    left: 20
+    left: 20,
   },
   buttonStyle2: {
     color: "#9C27B0",
     alignItems: "flex-end",
-    marginRight: 30
+    marginRight: 30,
   },
   logoContainer: {
     marginBottom: 15,
-    alignItems: "center"
+    alignItems: "center",
   },
   buttonText: {
     textAlign: "center",
     top: 7,
     fontSize: 24,
     color: "#fffffF",
-    opacity: 1
+    opacity: 1,
   },
   buttonContainer: {
-    margin: 25
-  }
+    margin: 25,
+  },
 });
 
 export default Register;
