@@ -55,7 +55,7 @@ class Login extends Component {
 
       const response = await firebase
         .auth()
-        .signInWithEmailAndPassword(email, password);
+        .signInWithEmailAndPassword(phone, password);
       if (response.user) {
         this.props.navigation.navigate("Bvn");
       }

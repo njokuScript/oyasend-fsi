@@ -55,7 +55,7 @@ class Register extends Component {
       // await Utils.setStorageData(response);
       const response = await firebase
         .auth()
-        .createUserWithEmailAndPassword(email, password);
+        .createUserWithEmailAndPassword(phoneNumber, password);
 
       if (response.user.uid) {
         const { uid } = response.user;
