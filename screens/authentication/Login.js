@@ -101,7 +101,7 @@ class Login extends Component {
                 iconColor="#9C27B0"
                 onBlur={handleBlur("phoneNumber")}
               />
-              <ErrorMessage errorValue={touched.phone && errors.phone} />
+              <ErrorMessage errorValue={touched.phone} />
               <FormInput
                 name="password"
                 value={values.password}
